@@ -1,0 +1,153 @@
+
+:root {
+  --bg-gradient: linear-gradient(135deg, #667eea, #764ba2);
+  --glass-bg: rgba(255, 255, 255, 0.18);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --text-color: #ffffff;
+  --accent: #00ffd5;
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color);
+}
+
+
+.container {
+  width: 440px;
+  padding: 32px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow);
+  text-align: center;
+  animation: slideFade 0.8s ease-out;
+}
+
+
+.container h1 {
+  font-size: 24px;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+}
+
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.buttons button {
+  padding: 13px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  color: #222;
+  background: linear-gradient(135deg, #ffffff, #eaeaea);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glow Overlay */
+.buttons button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(0,255,213,0.5), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.buttons button:hover::after {
+  opacity: 1;
+}
+
+/* Hover Motion */
+.buttons button:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Click */
+.buttons button:active {
+  transform: scale(0.96);
+}
+
+.output {
+  margin-top: 26px;
+  padding: 18px;
+  min-height: 58px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.28);
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: glowPulse 1.6s infinite ease-in-out;
+}
+
+.output:has(:contains("Loading")) {
+  animation: shimmer 1.2s infinite linear;
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 0 rgba(0, 255, 213, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 213, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(0, 255, 213, 0.4);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200px;
+  }
+  to {
+    background-position: 200px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+  }
+
+  .buttons {
+    grid-template-columns: 1fr;
+  }
+}

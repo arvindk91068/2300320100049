@@ -1,0 +1,167 @@
+/* ------------------------------
+   Root Variables (Theme System)
+--------------------------------*/
+:root {
+  --bg-main: linear-gradient(135deg, #667eea, #764ba2);
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --text-main: #ffffff;
+  --accent: #00ffd5;
+  --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* ------------------------------
+   Global Reset
+--------------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ------------------------------
+   Body Styling
+--------------------------------*/
+body {
+  min-height: 100vh;
+  background: var(--bg-main);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-main);
+}
+
+/* ------------------------------
+   Main Card (Glassmorphism)
+--------------------------------*/
+.container {
+  width: 420px;
+  padding: 30px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 18px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+  animation: fadeIn 0.8s ease;
+}
+
+/* ------------------------------
+   Heading
+--------------------------------*/
+.container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+/* ------------------------------
+   Buttons Grid
+--------------------------------*/
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 15px;
+}
+
+/* ------------------------------
+   Button Styling
+--------------------------------*/
+.buttons button {
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+  background: linear-gradient(135deg, #ffffff, #e6e6e6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Button Hover Glow */
+.buttons button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255,255,255,0.7), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.buttons button:hover::before {
+  opacity: 1;
+}
+
+/* Hover Effects */
+.buttons button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* Active Click */
+.buttons button:active {
+  transform: scale(0.97);
+}
+
+/* ------------------------------
+   Output Box
+--------------------------------*/
+.output {
+  margin-top: 25px;
+  padding: 18px;
+  min-height: 55px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* ------------------------------
+   Animations
+--------------------------------*/
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 rgba(0, 255, 213, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(0, 255, 213, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(0, 255, 213, 0.4);
+  }
+}
+
+/* ------------------------------
+   Responsive (Mobile Friendly)
+--------------------------------*/
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+    padding: 22px;
+  }
+
+  .buttons {
+    grid-template-columns: 1fr;
+  }
+}
